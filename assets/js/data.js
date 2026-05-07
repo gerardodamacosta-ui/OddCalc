@@ -126,6 +126,6 @@ export const LAYOUT = {
   RH: 95,
   NR: 27,
   PX: 44,
-  PY: 68,
+  PY: 36,
   VW: 680
 };

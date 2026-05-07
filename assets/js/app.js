@@ -22,7 +22,7 @@ const C = {
   eDep: dark ? '#5DCAA5' : '#0F6E56'
 };
 
-let filter = 'all';
+let filter = null;
 let sel = null;
 
 function xy(name) {
@@ -31,7 +31,7 @@ function xy(name) {
 }
 
 function vis() {
-  return Object.keys(SP).filter((name) => filter === 'all' || SP[name].b === filter);
+  return Object.keys(SP).filter((name) => !filter || SP[name].b === filter);
 }
 
 function depsOf(name) {
@@ -124,29 +124,11 @@ function drawNode(name) {
   svg.appendChild(g);
 }
 
-function drawBiomeLabel(label, x, y, color) {
-  const w = label.length * 7.2 + 12;
-  svg.appendChild(mk('rect', {
-    x: x - 4,
-    y: y - 14,
-    width: w,
-    height: 19,
-    rx: '9',
-    fill: dark ? 'rgba(26,26,24,0.85)' : 'rgba(255,255,255,0.85)',
-    stroke: color,
-    'stroke-width': '0.5'
-  }));
-
-  const t = mk('text', { x, y, 'font-size': '11', 'font-weight': '500', fill: color, 'letter-spacing': '0.05em' });
-  t.textContent = label;
-  svg.appendChild(t);
-}
-
 function redraw() {
   svg.innerHTML = '';
   const visible = new Set(vis());
 
-  if (filter === 'all') {
+  if (!filter) {
     svg.appendChild(mk('line', {
       x1: PX + 3.7 * CW,
       y1: PY - 44,
@@ -157,11 +139,6 @@ function redraw() {
       'stroke-dasharray': '4 4'
     }));
   }
-
-  const wC = dark ? '#9FE1CB' : '#3B6D11';
-  const mC = dark ? '#85B7EB' : '#185FA5';
-  if (filter !== 'mtn') drawBiomeLabel('🌲 WOODLAND', PX, 22, wC);
-  if (filter !== 'wood') drawBiomeLabel('⛰️ MOUNTAIN', PX + 4.5 * CW, 22, mC);
 
   visible.forEach((name) => {
     Object.keys(SP[name].sIn).forEach((dep) => {
@@ -217,11 +194,11 @@ function renderInfo(name) {
 }
 
 function setFilter(nextFilter) {
-  filter = nextFilter;
+  filter = filter === nextFilter ? null : nextFilter;
   sel = null;
 
   filterButtons.forEach((btn) => {
-    const isActive = btn.dataset.filter === nextFilter;
+    const isActive = btn.dataset.filter === filter;
     btn.classList.toggle('on', isActive);
   });
 
