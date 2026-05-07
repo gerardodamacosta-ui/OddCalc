@@ -1,7 +1,7 @@
 export const SP = {
   Stumpy: {
     b: 'wood',
-    e: '🪵',
+    e: '🍃',
     t: '32s',
     desc: 'Spark base. Ingrediente clave de toda la cadena de producción.',
     sIn: {},
@@ -49,7 +49,7 @@ export const SP = {
   },
   Rocky: {
     b: 'mtn',
-    e: '🪨',
+    e: '🌑',
     t: '32s',
     desc: 'Base de todos los Mountain Sparks avanzados.',
     sIn: { Stumpy: 2 },
