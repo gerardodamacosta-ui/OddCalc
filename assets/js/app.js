@@ -10,11 +10,12 @@ const infoPanel = document.getElementById('info');
 const filterButtons = Array.from(document.querySelectorAll('.fbtn[data-filter]'));
 
 svg.setAttribute('viewBox', `0 0 ${VW} ${VH}`);
-svg.setAttribute('height', String(VH));
+svg.setAttribute('height', VH);
 
 const C = {
   wood: { f: dark ? '#27500A' : '#EAF3DE', s: dark ? '#9FE1CB' : '#3B6D11', t: dark ? '#C0DD97' : '#3B6D11' },
   mtn: { f: dark ? '#0C447C' : '#E6F1FB', s: dark ? '#85B7EB' : '#185FA5', t: dark ? '#B5D4F4' : '#185FA5' },
+  metal: { f: dark ? '#4A2800' : '#FEF3E2', s: dark ? '#E8A030' : '#C07828', t: dark ? '#F5C06E' : '#7A4A10' },
   sel: { f: dark ? '#3C3489' : '#EEEDFE', s: dark ? '#AFA9EC' : '#534AB7', t: dark ? '#CECBF6' : '#26215C' },
   dep: { f: dark ? '#085041' : '#E1F5EE', s: dark ? '#5DCAA5' : '#0F6E56', t: dark ? '#9FE1CB' : '#085041' },
   dim: { f: dark ? '#1a1a18' : '#F1EFE8', s: dark ? '#2C2C2A' : '#D3D1C7', t: dark ? '#3a3a38' : '#C0BEBC' },
@@ -129,15 +130,9 @@ function redraw() {
   const visible = new Set(vis());
 
   if (!filter) {
-    svg.appendChild(mk('line', {
-      x1: PX + 3.7 * CW,
-      y1: PY - 44,
-      x2: PX + 3.7 * CW,
-      y2: VH - 16,
-      stroke: dark ? '#2C2C2A' : '#D3D1C7',
-      'stroke-width': '0.5',
-      'stroke-dasharray': '4 4'
-    }));
+    const divStyle = { stroke: dark ? '#2C2C2A' : '#D3D1C7', 'stroke-width': '0.5', 'stroke-dasharray': '4 4' };
+    svg.appendChild(mk('line', { x1: PX + 3.7 * CW, y1: PY - 44, x2: PX + 3.7 * CW, y2: VH - 16, ...divStyle }));
+    svg.appendChild(mk('line', { x1: PX + 7.9 * CW, y1: PY - 44, x2: PX + 7.9 * CW, y2: VH - 16, ...divStyle }));
   }
 
   visible.forEach((name) => {
@@ -149,7 +144,7 @@ function redraw() {
       if (sel) {
         color = name === sel && stOf(dep) === 'dep' ? C.eDep : C.eN;
       } else {
-        color = SP[dep].b === 'wood' ? C.wood.s : C.mtn.s;
+        color = SP[dep].b === 'wood' ? C.wood.s : SP[dep].b === 'mtn' ? C.mtn.s : C.metal.s;
       }
       drawArrow(dx, dy, cx, cy, color);
     });
@@ -183,7 +178,7 @@ function renderInfo(name) {
     <div class="ip-header">
       <span class="ip-emoji">${sp.e}</span>
       <span class="ip-name">${name} Spark</span>
-      <span class="ip-badge ${sp.b}">${sp.b === 'wood' ? '🌲 Woodland' : '⛰️ Mountain'}</span>
+      <span class="ip-badge ${sp.b}">${sp.b === 'wood' ? '🌲 Woodland' : sp.b === 'mtn' ? '⛰️ Mountain' : '⚙️ Metal'}</span>
       <span class="ip-time">⏱ ${sp.t}</span>
     </div>
     <div class="ip-grid">

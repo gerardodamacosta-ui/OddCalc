@@ -102,6 +102,38 @@ export const SP = {
     desc: 'Combate con daño cortante. Efectivo contra raíces y árboles.',
     sIn: { Rocky: 2, Choppy: 3 },
     mat: []
+  },
+  Burning: {
+    b: 'metal',
+    e: '🔥',
+    t: '48s',
+    desc: 'Ataca quemando en un area alrededor de él.',
+    sIn: {},
+    mat: [{ n: 'Lava Cap', q: '5x' }, { n: 'Cooper Ingot', q: '8x' }, { n: 'Aether Crystal', q: '1x' }]
+  },
+  Freezing: {
+    b: 'metal',
+    e: '❄️',
+    t: '48s',
+    desc: 'Ataca congelando en un area alrededor de él. Inmune a temperaturas extremas.',
+    sIn: {},
+    mat: [{ n: 'Stellar Ice', q: '10x' }, { n: 'Cooper Ingot', q: '8x' }, { n: 'Aether Crystal', q: '1x' }]
+  },
+  Handy: {
+    b: 'metal',
+    e: '🔧',
+    t: '48s',
+    desc: 'Evolución de Crafty. Excelente para trabajar en edificios.',
+    sIn: { Crafty: 5 },
+    mat: [{ n: 'Cooper Ingot', q: '4x' }, { n: 'Aether Crystal', q: '1x' }]
+  },
+  Drilly: {
+    b: 'metal',
+    e: '⛏️',
+    t: '64s',
+    desc: 'Un solo uso. Perfora cualquier material, incluso los extra duros como Permafrost y Obsidiana.',
+    sIn: { Slashy: 6 },
+    mat: [{ n: 'Drill Bit', q: '3x' }, { n: 'Aether Crystal', q: '3x' }]
   }
 };
 
@@ -118,7 +150,11 @@ export const POS = {
   Boomy: [5, 2],
   Puffy: [7, 2],
   Slashy: [4, 3],
-  Crashy: [5.8, 3]
+  Crashy: [5.8, 3],
+  Burning: [8.5, 1],
+  Freezing: [10, 1],
+  Handy: [8.5, 2],
+  Drilly: [8.5, 3]
 };
 
 export const LAYOUT = {
@@ -127,5 +163,5 @@ export const LAYOUT = {
   NR: 27,
   PX: 44,
   PY: 36,
-  VW: 680
+  VW: 900
 };
