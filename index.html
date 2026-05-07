@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OddSparkCalc</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div id="wrap">
+    <div class="top-bar">
+      <div class="filter-group">
+        <button class="fbtn on" data-filter="all">Todos</button>
+        <button class="fbtn" data-filter="wood">🌲 Woodland</button>
+        <button class="fbtn" data-filter="mtn">⛰️ Mountain</button>
+      </div>
+      <span class="hint-txt">Clic en un nodo para ver la receta</span>
+    </div>
+
+    <div class="legend">
+      <div class="ld"><div class="ld-dot" style="background:#C0DD97;border:1.5px solid #3B6D11"></div>Woodland</div>
+      <div class="ld"><div class="ld-dot" style="background:#85B7EB;border:1.5px solid #185FA5"></div>Mountain</div>
+      <div class="ld"><div class="ld-dot" style="background:#AFA9EC;border:2px solid #534AB7"></div>Seleccionado</div>
+      <div class="ld"><div class="ld-dot" style="background:#9FE1CB;border:1.5px solid #0F6E56"></div>Ingrediente requerido</div>
+    </div>
+
+    <div class="svg-wrap">
+      <img class="bg-img" src="source/Oddimg.png" alt="">
+      <svg id="g"></svg>
+    </div>
+
+    <div class="info-panel" id="info">
+      <div class="ip-empty">Seleccioná un Spark del gráfico para ver su receta completa.</div>
+    </div>
+  </div>
+
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
